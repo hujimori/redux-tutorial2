@@ -4,8 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import CounterActions from '../actions/counter';
-import { MuiThemeProvider } from 'material-ui/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from '../theme/themeFile';
+import Counter from '../components/Counter';
 
 class App extends PureComponent {
     static propTypes = {
@@ -19,9 +20,7 @@ class App extends PureComponent {
             <MuiThemeProvider theme={theme}>
                 <div>
                     <Header />
-                    <h2>count={counter.value}</h2>
-                    <button onClick={actions.increment}>増加</button>
-                    <button onClick={actions.decrement}>減少</button>
+                    <Counter counter={counter} actions={actions} />
                 </div>
             </MuiThemeProvider>
         );
