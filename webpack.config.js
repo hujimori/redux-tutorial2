@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     context: __dirname,
@@ -16,7 +17,9 @@ module.exports = {
         rules: [
             { test: /\.jsx?$/, enforce: 'pre', exclude: /node_modules/, loader: 'eslint-loader' },
             { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel-loader'] },
+            { test: /\.css$/, use: ExtractTextPlugin.extract({ use: 'css-loader' }) },
         ],
+
     },
     resolve: {
         extensions: ['.js', '.jsx'],
@@ -35,5 +38,7 @@ module.exports = {
                 },
             },
         }),
+        new ExtractTextPlugin('css/bundle.css')
+
     ],
 };
